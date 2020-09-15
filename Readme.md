@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Силанов](https://up.htmlacademy.ru/javascript/21/user/1439597).
-* Наставник:[Андрей Слесаренко].
+* Наставник:[Андрей Слесаренко](https://htmlacademy.ru/profile/swen).
 
 ---
 
