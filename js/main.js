@@ -36,11 +36,12 @@ var getCurrentObjectFeatures = function (ObjectFeatures) {
   return currentObjectFeatures;
 };
 
+
 var getCurrentObjectPhotos = function (count) {
   var currentObjectPhotos = [];
 
-  for (var k = 0; k < getRandomInt(count); k++) {
-    currentObjectPhotos.push('http://o0.github.io/assets/images/tokyo/hotel' + (k + 1) + '.jpg');
+  for (var i = 0; i < getRandomInt(count); i++) {
+    currentObjectPhotos.push('http://o0.github.io/assets/images/tokyo/hotel' + (i + 1) + '.jpg');
   }
 
   return currentObjectPhotos;
