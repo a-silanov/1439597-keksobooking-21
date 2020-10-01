@@ -9,6 +9,7 @@ var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pi
 var ROOMS = 10;
 var GUESTS = 5;
 var countRentObjects = 8;
+var BASE_IMAGE_URL = ('http://o0.github.io/assets/images/tokyo/hotel');
 var countCards = 1;
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
@@ -20,19 +21,19 @@ var getRandomInt = function (max) {
   return Math.floor(Math.random() * Math.floor(max)) + 1;
 };
 
-var getCurrentObjectFeatures = function (ObjectFeatures) {
+var getCurrentObjectFeatures = function (objectFeatures) {
   var currentObjectFeatures = [];
 
-  for (var i = 0; i < ObjectFeatures.length; i++) {
+  for (var i = 0; i < objectFeatures.length; i++) {
     var sendIndex = getRandomInt(2);
 
     if (sendIndex === 1) {
-      currentObjectFeatures.push(ObjectFeatures[i]);
+      currentObjectFeatures.push(objectFeatures[i]);
     }
   }
 
   if (currentObjectFeatures.length === 0) {
-    currentObjectFeatures.push(getRandomInt(ObjectFeatures.length));
+    currentObjectFeatures.push(getRandomInt(objectFeatures.length));
   }
 
   return currentObjectFeatures;
@@ -43,7 +44,7 @@ var getCurrentObjectPhotos = function (count) {
   var currentObjectPhotos = [];
 
   for (var i = 0; i < getRandomInt(count); i++) {
-    currentObjectPhotos.push('http://o0.github.io/assets/images/tokyo/hotel' + (i + 1) + '.jpg');
+    currentObjectPhotos.push(BASE_IMAGE_URL + (i + 1) + '.jpg');
   }
 
   return currentObjectPhotos;
