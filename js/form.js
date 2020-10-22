@@ -1,10 +1,7 @@
 'use strict';
 
 (function () {
-  var map = document.querySelector('.map');
-  var mainPin = map.querySelector('.map__pin--main');
   var form = document.querySelector('.ad-form');
-  var addressInput = form.querySelector('#address');
   var titleInput = form.querySelector('#title');
   var priceInput = form.querySelector('#price');
   var typeInput = form.querySelector('#type');
@@ -122,7 +119,7 @@
   };
 
   var setFormHandlers = function () {
-    addressInput.value = window.util.getAddress(mainPin);
+
 
     titleInput.addEventListener('invalid', elementLengthValidationHandler);
     titleInput.addEventListener('input', elementInputCheckHandler);
