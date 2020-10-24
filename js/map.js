@@ -67,7 +67,7 @@
         } else if (mainPin.offsetTop < map.offsetTop) {
           mainPin.style.top = map.offsetTop + 'px';
         } else if (mainPin.offsetLeft < map.offsetTop) {
-          mainPin.style.left = map.offsetTop + 'px'; // offsetLeft не подходит, он почемуто выше ноля. Почему?
+          mainPin.style.left = map.offsetTop + 'px';
         }
       };
 
