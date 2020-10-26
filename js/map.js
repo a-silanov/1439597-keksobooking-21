@@ -32,6 +32,8 @@
   var getInitialState = function () {
     window.util.disableElements(formFieldsets);
     window.util.disableElements(mapFiltersElements);
+    form.classList.add('ad-form--disabled');
+    map.classList.add('map--faded');
 
     mainPin.addEventListener('mousedown', showMapHandler);
     mainPin.addEventListener('keydown', showMapHandler);
