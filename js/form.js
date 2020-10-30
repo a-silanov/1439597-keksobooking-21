@@ -1,27 +1,27 @@
 'use strict';
 
 (function () {
-  var form = document.querySelector('.ad-form');
-  var titleInput = form.querySelector('#title');
-  var priceInput = form.querySelector('#price');
-  var typeInput = form.querySelector('#type');
-  var timeInInput = form.querySelector('#timein');
-  var timeOutInput = form.querySelector('#timeout');
-  var roomsInput = form.querySelector('#room_number');
-  var guestsInput = form.querySelector('#capacity');
-  var avatarInput = form.querySelector('#avatar');
-  var roomPictureInput = form.querySelector('#images');
-  var resetButton = form.querySelector('.ad-form__reset');
-  var descriptionInput = form.querySelector('#description');
+  var formElement = document.querySelector('.ad-form');
+  var titleInputElement = formElement.querySelector('#title');
+  var priceInputElement = formElement.querySelector('#price');
+  var typeInputElement = formElement.querySelector('#type');
+  var timeInInputElement = formElement.querySelector('#timein');
+  var timeOutInputElement = formElement.querySelector('#timeout');
+  var roomsInputElement = formElement.querySelector('#room_number');
+  var guestsInputElement = formElement.querySelector('#capacity');
+  var avatarInputElement = formElement.querySelector('#avatar');
+  var roomPictureInputElement = formElement.querySelector('#images');
+  var resetButtonElement = formElement.querySelector('.ad-form__reset');
+  var descriptionInputElement = formElement.querySelector('#description');
 
   var formResetHandler = function (evt) {
     evt.preventDefault();
 
     var empty = '';
 
-    titleInput.value = empty;
-    priceInput.value = empty;
-    descriptionInput.value = empty;
+    titleInputElement.value = empty;
+    priceInputElement.value = empty;
+    descriptionInputElement.value = empty;
   };
 
   var elementLengthValidationHandler = function (evt) {
@@ -49,18 +49,18 @@
   };
 
   var priceMaxMinValidationHandler = function () {
-    var price = Number(priceInput.value);
-    var priceMin = Number(priceInput.min);
-    var priceMax = Number(priceInput.max);
+    var price = Number(priceInputElement.value);
+    var priceMin = Number(priceInputElement.min);
+    var priceMax = Number(priceInputElement.max);
 
-    if (priceInput.value === '') {
-      priceInput.setCustomValidity('Обязательное поле');
+    if (priceInputElement.value === '') {
+      priceInputElement.setCustomValidity('Обязательное поле');
     } else if (price < priceMin) {
-      priceInput.setCustomValidity('Значение этого поля не должно быть выше чем ' + priceInput.min);
+      priceInputElement.setCustomValidity('Значение этого поля не должно быть выше чем ' + priceInputElement.min);
     } else if (price > priceMax) {
-      priceInput.setCustomValidity('Значение этого поля не должно быть ниже чем ' + priceInput.max);
+      priceInputElement.setCustomValidity('Значение этого поля не должно быть ниже чем ' + priceInputElement.max);
     } else {
-      priceInput.setCustomValidity('');
+      priceInputElement.setCustomValidity('');
     }
   };
 
@@ -78,21 +78,21 @@
     var target = evt.target;
 
     if (target.value === 'bungalo') {
-      priceInput.min = 0;
+      priceInputElement.min = 0;
     } else if (target.value === 'flat') {
-      priceInput.min = 1000;
+      priceInputElement.min = 1000;
     } else if (target.value === 'house') {
-      priceInput.min = 5000;
+      priceInputElement.min = 5000;
     } else if (target.value === 'palace') {
-      priceInput.min = 10000;
+      priceInputElement.min = 10000;
     }
 
-    priceInput.placeholder = priceInput.min;
+    priceInputElement.placeholder = priceInputElement.min;
   };
 
   var timeCheckHandler = function (evt) {
-    var chosenInput = (evt.target === timeInInput) ? timeInInput : timeOutInput;
-    var remainingInput = (evt.target === timeInInput) ? timeOutInput : timeInInput;
+    var chosenInput = (evt.target === timeInInputElement) ? timeInInputElement : timeOutInputElement;
+    var remainingInput = (evt.target === timeInInputElement) ? timeOutInputElement : timeInInputElement;
 
     if (chosenInput.value === '12:00') {
       remainingInput.value = chosenInput.value;
@@ -105,8 +105,8 @@
 
   var compareRoomsGuestsHandler = function () {
     var errorMassage = '';
-    var rooms = Number(roomsInput.value);
-    var guests = Number(guestsInput.value);
+    var rooms = Number(roomsInputElement.value);
+    var guests = Number(guestsInputElement.value);
 
     if (rooms < guests) {
       errorMassage = 'Количество комнат должно быть больше или равно количеству гостей';
@@ -114,7 +114,7 @@
       errorMassage = 'Столько комнат - не для гостей';
     }
 
-    roomsInput.setCustomValidity(errorMassage);
+    roomsInputElement.setCustomValidity(errorMassage);
   };
 
   var checkFileTypeHandler = function (evt) {
@@ -131,28 +131,30 @@
   };
 
   var submitFormHandler = function (evt) {
-    window.backend.save(new FormData(form), function () {
+    evt.preventDefault();
+
+    window.backend.save(new FormData(formElement), function () {
       window.message.success();
-      window.pin.deletePins();
+      window.pin.delete();
+      window.card.close();
       window.map.getInitialState();
     }, window.message.error);
-    evt.preventDefault();
   };
 
   var setFormHandlers = function () {
-    titleInput.addEventListener('invalid', elementLengthValidationHandler);
-    titleInput.addEventListener('input', elementInputCheckHandler);
-    priceInput.addEventListener('invalid', priceMaxMinValidationHandler);
-    priceInput.addEventListener('input', elementMaxMinInputCheckHandler);
-    typeInput.addEventListener('change', selectChangeHandler);
-    timeOutInput.addEventListener('change', timeCheckHandler);
-    timeInInput.addEventListener('change', timeCheckHandler);
-    roomsInput.addEventListener('change', compareRoomsGuestsHandler);
-    guestsInput.addEventListener('change', compareRoomsGuestsHandler);
-    avatarInput.addEventListener('input', checkFileTypeHandler);
-    roomPictureInput.addEventListener('input', checkFileTypeHandler);
-    form.addEventListener('submit', submitFormHandler, window.message.error);
-    resetButton.addEventListener('click', formResetHandler);
+    titleInputElement.addEventListener('invalid', elementLengthValidationHandler);
+    titleInputElement.addEventListener('input', elementInputCheckHandler);
+    priceInputElement.addEventListener('invalid', priceMaxMinValidationHandler);
+    priceInputElement.addEventListener('input', elementMaxMinInputCheckHandler);
+    typeInputElement.addEventListener('change', selectChangeHandler);
+    timeOutInputElement.addEventListener('change', timeCheckHandler);
+    timeInInputElement.addEventListener('change', timeCheckHandler);
+    roomsInputElement.addEventListener('change', compareRoomsGuestsHandler);
+    guestsInputElement.addEventListener('change', compareRoomsGuestsHandler);
+    avatarInputElement.addEventListener('input', checkFileTypeHandler);
+    roomPictureInputElement.addEventListener('input', checkFileTypeHandler);
+    formElement.addEventListener('submit', submitFormHandler, window.message.error);
+    resetButtonElement.addEventListener('click', formResetHandler);
   };
 
   window.form = {
