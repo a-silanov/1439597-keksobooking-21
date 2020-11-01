@@ -10,7 +10,7 @@
     replyStatus: 'Статус ответа: '
   };
 
-  var load = function (successHandler, errorHandler) {
+  var createRequest = function (successHandler, errorHandler, method, URL) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -31,31 +31,20 @@
 
     xhr.timeout = 10000;
 
-    xhr.open('GET', loadURL);
+    xhr.open(method, URL);
+
+    return xhr;
+  };
+
+  var load = function (successHandler, errorHandler) {
+    var xhr = createRequest(successHandler, errorHandler, 'GET', loadURL);
+
     xhr.send();
   };
 
   var save = function (data, successHandler, errorHandler) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
+    var xhr = createRequest(successHandler, errorHandler, 'POST', saveURL);
 
-    xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
-        successHandler(xhr.response);
-      } else {
-        errorHandler(serverMessages.replyStatus + xhr.status + ' ' + xhr.statusText);
-      }
-    });
-    xhr.addEventListener('error', function () {
-      errorHandler(serverMessages.connectionError);
-    });
-    xhr.addEventListener('timeout', function () {
-      errorHandler(serverMessages.timeoutError + xhr.timeout + serverMessages.timeoutErrorUnits);
-    });
-
-    xhr.timeout = 10000;
-
-    xhr.open('POST', saveURL);
     xhr.send(data);
   };
 

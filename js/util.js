@@ -17,6 +17,12 @@
     }
   };
 
+  var removeChildElements = function (element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  };
+
   var getRandomInt = function (max) {
     return Math.floor(Math.random() * Math.floor(max));
   };
@@ -51,6 +57,7 @@
     enableElements: enableElements,
     getRandomInt: getRandomInt,
     getRandomSlicedArray: getRandomSlicedArray,
-    getAddress: getAddress
+    getAddress: getAddress,
+    removeChildElements: removeChildElements
   };
 })();
