@@ -14,6 +14,7 @@
   var washerFilterElement = featuresFieldElement.querySelector('#filter-washer');
   var elevatorFilterElement = featuresFieldElement.querySelector('#filter-elevator');
   var conditionerFilterElement = featuresFieldElement.querySelector('#filter-conditioner');
+  var lastTimeout;
 
   var isFeaturesMatched = function (arr, filterValue) {
     var reply = false;
@@ -105,7 +106,13 @@
     window.card.close();
     window.pin.delete();
     var filteredObjects = filterAdvertisement(window.data.cacheRentObjects);
-    window.pin.render(filteredObjects);
+
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(function () {
+      window.pin.render(filteredObjects);
+    }, 500);
   });
 
   window.filter = {
