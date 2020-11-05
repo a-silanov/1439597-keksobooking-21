@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  var rentObjectType = ['palace', 'flat', 'house', 'bungalo'];
-  var rentObjectCheckTime = ['12:00', '13:00', '14:00'];
+  var rentObjectTypes = ['palace', 'flat', 'house', 'bungalo'];
+  var rentObjectCheckTimes = ['12:00', '13:00', '14:00'];
   var rentObjectFeatures = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var ROOMS = 10;
   var GUESTS = 5;
@@ -14,8 +14,8 @@
   var cacheRentObjects = null;
 
   window.data = {
-    rentObjectType: rentObjectType,
-    rentObjectCheckTime: rentObjectCheckTime,
+    rentObjectType: rentObjectTypes,
+    rentObjectCheckTime: rentObjectCheckTimes,
     rentObjectFeatures: rentObjectFeatures,
     ROOMS: ROOMS,
     GUESTS: GUESTS,

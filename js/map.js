@@ -75,7 +75,7 @@
 
   var successHandler = function (data) {
     window.data.cacheRentObjects = data;
-    var filteredData = window.filter.advertisement(data);
+    var filteredData = window.filter.use(data);
 
     window.pin.render(filteredData);
     window.util.enableElements(mapFiltersElements);
