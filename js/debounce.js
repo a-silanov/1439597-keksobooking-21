@@ -1,11 +1,11 @@
 'use strict';
 
-let DEBOUNCE_INTERVAL = 500; // ms
+const DEBOUNCE_INTERVAL = 500;
 
 window.debounce = (cb) => {
   let lastTimeout = null;
 
-  const innerDebounce = (...parameters) => {
+  return (...parameters) => {
     if (lastTimeout) {
       window.clearTimeout(lastTimeout);
     }
@@ -13,6 +13,4 @@ window.debounce = (cb) => {
       cb(...parameters);
     }, DEBOUNCE_INTERVAL);
   };
-
-  return innerDebounce();
 };

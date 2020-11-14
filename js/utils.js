@@ -1,49 +1,20 @@
 'use strict';
 
-const showError = (errorMessage) => {
-  const node = document.createElement(`div`);
-  node.style = `z-index: 100; margin: 0 auto; text-align: center; background-color: red;`;
-  node.style.position = `absolute`;
-  node.style.left = 0;
-  node.style.right = 0;
-  node.style.fontSize = `30px`;
-
-  node.textContent = errorMessage;
-  document.body.insertAdjacentElement(`afterbegin`, node);
-};
-
-const disableArrayElements = (array, disable) => {
-  for (let i = 0; i < array.length; i++) {
-    array[i].disabled = disable;
+const invokeIfKeyIs = (key, cb) => (evt) => evt.key === key && cb(evt);
+const invokeIfButtonIs = (button, cb) => (evt) => evt.button === button && cb(evt);
+const shuffleArray = (arr) => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
+  return arr;
 };
-
-const getRandomInInterval = (min, max) => {
-  let rand = min + Math.random() * (max + 1 - min);
-
-  return Math.floor(rand);
-};
-
-const getRandomInt = (max) => Math.floor(Math.random() * (max));
-
-const getRandomArrayElement = (array) => array[getRandomInt(array.length)];
-
-const getRandomLengthArray = (sourcArray) => {
-  let length = getRandomInt(sourcArray.length);
-  let resultArr = [];
-
-  for (let i = 0; i < length; i++) {
-    resultArr.push(sourcArray[i]);
-  }
-
-  return resultArr;
-};
+const getTruncatedArray = (arr, limit) => shuffleArray(arr).slice(0, limit);
+const removeArray = (arr) => arr.forEach((element) => element.remove());
 
 window.utils = {
-  onError: showError,
-  disableArrayElements: disableArrayElements,
-  getRandomInInterval: getRandomInInterval,
-  getRandomInt: getRandomInt,
-  getRandomArrayElement: getRandomArrayElement,
-  getRandomLengthArray: getRandomLengthArray
+  invokeIfKeyIs,
+  invokeIfButtonIs,
+  getTruncatedArray,
+  removeArray,
 };
